@@ -1,3 +1,5 @@
+# just adding this note here to make change and see how the new commit will be looking like
+
 import matplotlib.pyplot as plt
 import numpy as np
 from django.http import HttpResponse

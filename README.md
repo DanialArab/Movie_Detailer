@@ -1,4 +1,4 @@
-[Link text](http://danialarab.pythonanywhere.com/movies/){:target="_blank"}
+[Movie Detailer Application](http://danialarab.pythonanywhere.com/movies/){:target="_blank"}
 
 
 

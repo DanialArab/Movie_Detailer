@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Search Results</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #333;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Movie Search Results</h1>
+  {% if movie_data %}
+      {% if movie_data.Search %}
+          <table>
+            <tr>
+              <th>Title</th>
+              {% comment %} <th>Year</th> {% endcomment %}
+              <th>Released</th> 
+              <th>Type</th>
+              <th>Genre</th>
+              <th>Director</th>
+              <th>Actors</th>
+              <th>Country</th>
+              <th>Runtime</th> 
+              <th>Awards</th>
+              {% comment %} <th>Ratings-Internet Movie Database</th>
+              <th>Ratings-Rotten Tomatoes</th>
+              <th>Ratings-Metacritic</th> {% endcomment %}
+              <th>imdbVotes</th>
+              <th>imdbRating</th>
+              <th>Metascore</th>
+              <th>BoxOffice</th>
+            </tr>
+          {% for movie in movie_data.Search %}
+            <tr>
+              <td>{{ movie.Title }}</td>
+              {% comment %} <td>{{ movie.Year }}</td> {% endcomment %}
+              <td>{{ movie.Released }}</td>
+              <td>{{ movie.Type }}</td>
+              <td>{{ movie.Genre }}</td>
+              <td>{{ movie.Director }}</td>
+              <td>{{ movie.Actors}}</td>
+              <td>{{ movie.Country}}</td>
+              <td>{{ movie.Runtime }}</td>
+              <td>{{ movie.Awards }}</td>
+              {% comment %} <td>{{ movie.Ratings.0.Value }}</td>
+              <td>{{ movie.Ratings.1.Value }}</td>
+              <td>{{ movie.Ratings.2.Value }}</td> {% endcomment %}
+              <td>{{ movie.imdbVotes }}</td>
+              <td>{{ movie.imdbRating }}</td>
+              <td>{{ movie.Metascore }}</td>
+              <td>{{ movie.BoxOffice }}</td>
+            </tr>
+          {% endfor %}
+          </table>
+      {% else %}
+          <p>No movie data found.</p>
+      {% endif %}
+  {% endif %}
+</body>
+</html>
+
+
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Search Results</title>
+</head>
+<body>
+  <h1>Movie Search Results</h1>
+  {% if movie_data %}
+      {% if movie_data.Search %}
+          {% for movie in movie_data.Search %}
+              <p>Title: {{ movie.Title }}</p>
+              <p>Year: {{ movie.Year }}</p>
+              <p>IMDB ID: {{ movie.imdbID }}</p>
+              <p>Metascore: {{ movie.Metascore }}</p>
+              <p>Type: {{ movie.Type }}</p>
+              <p>Genre: {{ movie.Genre }}</p>
+              <p>Plot: {{ movie.Plot }}</p>
+              {% if movie.Poster != "N/A" %}
+                  <img src="{{ movie.Poster }}" alt="{{ movie.Title }} poster">
+              {% endif %}
+              <hr>
+          {% endfor %}
+      {% else %}
+          <p>No movie data found.</p>
+      {% endif %}
+  {% endif %}
+</body>
+</html>  {% endcomment %}
+
+
+{% comment %} to get the plot of metascore vs titles: {% endcomment %}
+
+{% comment %} {% block content %}
+    <h1>Movie Results</h1>
+    <canvas id="myChart"></canvas>
+{% endblock %}
+
+{% block script %}
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Get movie titles and metascores from template variables
+        const movieTitles = {{ movie_titles|safe }};
+        const metascores = {{ metascores|safe }};
+
+        // Create chart data
+        const data = {
+            labels: movieTitles,
+            datasets: [{
+                label: 'Metascores',
+                data: metascores,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Create chart options
+        const options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+
+        // Create chart object
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    </script>
+{% endblock %} {% endcomment %}

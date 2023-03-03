@@ -1,5 +1,4 @@
-[Movie Detailer Application](http://danialarab.pythonanywhere.com/movies/){:target="_blank"}
-
+[Movie Detailer Application](http://danialarab.pythonanywhere.com/movies/){:target="_blank" rel="noopener"}
 
 
 This django-based web application makes API calls to OMDBAPI.com to find the movies's details based on some features of the movie (title, year, and genre) provided by the user. The title is required to run the application.
